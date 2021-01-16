@@ -12,3 +12,27 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.button{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, #EE5A24 0%, #ED4C67 25%, #B53471  100%);
+    border-radius:6px;
+    border: none;
+	  display:inline-block;
+	  cursor:pointer;
+	  color:#ffffff;
+	  font-family:Arial;
+    font-size:8px;
+    font-weight: 400;
+	  padding:5px 20px;
+    text-decoration:none;
+}
+.button:hover {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, #B53471 0%, #ED4C67 75%, #EE5A24  100% );
+}
+.button:active {
+    position:relative;
+    transition: 1s ease-in-out;
+	top:1px;
+}
