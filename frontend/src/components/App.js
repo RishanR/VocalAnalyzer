@@ -5,7 +5,7 @@ import '../css/App.css'
 const App = () => {
     return (
         <div className='main-container'>
-            test
+            Test
         </div>
     )
 }
