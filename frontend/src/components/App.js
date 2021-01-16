@@ -6,6 +6,9 @@ const App = () => {
     return (
         <div className='main-container'>
             Test
+           <button class="button">
+                Upload
+           </button>
         </div>
     )
 }
