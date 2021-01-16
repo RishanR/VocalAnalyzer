@@ -1,14 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
 import '../css/App.css'
+import ChooseSong from './ChooseSong'
 
 const App = () => {
     return (
         <div className='main-container'>
-            Test
-           <button class="button">
-                Upload
-           </button>
+            <ChooseSong />
         </div>
     )
 }

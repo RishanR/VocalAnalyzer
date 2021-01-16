@@ -1,9 +1,13 @@
 import React from 'react'
 
-export const ChooseSong = () => {
+const ChooseSong = () => {
     return (
         <div className='card-container'>
-            
+            <button class="button">
+                Upload
+           </button>
         </div>
     )
 }
+
+export default ChooseSong;

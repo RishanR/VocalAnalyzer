@@ -11,16 +11,18 @@
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-container {
   border-radius: 25px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  background-color: white;
   transition: 0.3s;
-}
-
-.card-container:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .button {
@@ -36,10 +38,12 @@
   font-weight: 400;
   padding: 5px 20px;
   text-decoration: none;
+  box-shadow: 0;
+  transition: box-shadow 0.25s ease-in-out;
 }
 .button:hover {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(90deg, #b53471 0%, #ed4c67 75%, #ee5a24 100%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.25s ease-in-out;
 }
 .button:active {
   position: relative;
