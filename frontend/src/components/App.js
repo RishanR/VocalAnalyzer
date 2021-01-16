@@ -2,11 +2,12 @@ import React from 'react'
 import { render } from 'react-dom'
 import '../css/App.css'
 import ChooseSong from './ChooseSong'
+import RecordVocals from './RecordVocals'
 
 const App = () => {
     return (
         <div className='main-container'>
-            <ChooseSong />
+            <RecordVocals />
         </div>
     )
 }

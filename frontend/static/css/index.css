@@ -22,7 +22,10 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 2rem;
   background-color: white;
-  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .button {
@@ -39,11 +42,11 @@
   padding: 5px 20px;
   text-decoration: none;
   box-shadow: 0;
-  transition: box-shadow 0.25s ease-in-out;
+  transition: box-shadow 0.15s ease-in-out;
 }
 .button:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.25s ease-in-out;
+  transition: box-shadow 0.15s ease-in-out;
 }
 .button:active {
   position: relative;
