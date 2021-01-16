@@ -1,12 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
-
+import '../css/App.css'
 
 const App = () => {
     return (
-        <h1>
-            Test
-        </h1>
+        <div className='main-container'>
+            test
+        </div>
     )
 }
 
