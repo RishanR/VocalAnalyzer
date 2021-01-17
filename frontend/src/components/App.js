@@ -7,7 +7,8 @@ import RecordVocals from './RecordVocals'
 const App = () => {
     return (
         <div className='main-container'>
-            <RecordVocals />
+            {/* <RecordVocals /> */}
+            <ChooseSong />
         </div>
     )
 }
