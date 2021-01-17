@@ -1,21 +1,30 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import * as d3 from 'd3';
+import axios from 'axios'
+import data from  '../../static/frontend/src/spreadsheets/music_analysis.csv';
 import WaveSurfer from "wavesurfer.js";
+
+var linGrad = document.createElement('canvas').getContext('2d').createLinearGradient(0, 0, 1000, 128);
+linGrad.addColorStop(0, '#ff8934');
+linGrad.addColorStop(0.5, '#971e63'); 
+linGrad.addColorStop(1, '#ef0348');
 
 const formWaveSurferOptions = ref => ({
   container: ref,
   waveColor: "#eee",
-  progressColor: "OrangeRed",
+  progressColor: linGrad,
   cursorColor: "OrangeRed",
+  barHeight:1.4,
   barWidth: 3,
   barRadius: 3,
   responsive: true,
-  height: 150,
+  height:150,
   // If true, normalize by the maximum peak instead of 1.0.
   normalize: true,
   // Use the PeakCache to improve rendering speed of large waveforms.
   partialRender: true
 });
+
 
 export default function Waveform({ url }) {
   const waveformRef = useRef(null);
@@ -28,25 +37,34 @@ export default function Waveform({ url }) {
   useEffect(() => {
     setPlay(false);
 
+    var csv_file;
+
+    axios.get('/api/vocalanalysis')
+      .then(function (response) {
+        // handle success
+        csv_file = response;
+      console.log(response);
+    })
     const options = formWaveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
 
     wavesurfer.current.load(url);
 
     wavesurfer.current.on("ready", function() {
-      // https://wavesurfer-js.org/docs/methods.html
-      // wavesurfer.current.play();
-      // setPlay(true);
 
-      // make sure object stillavailable when file loaded
       if (wavesurfer.current) {
         wavesurfer.current.setVolume(volume);
         setVolume(volume);
       }
     });
 
-    // Removes events, elements and disconnects Web Audio nodes.
-    // when component unmount
+    //replace data with csv
+    d3.csv(data).then(function(data){
+      console.log(data)
+    }).catch(function(err){
+      throw err
+    })
+
     return () => wavesurfer.current.destroy();
   }, [url]);
 
@@ -55,35 +73,17 @@ export default function Waveform({ url }) {
     wavesurfer.current.playPause();
   };
 
-  const onVolumeChange = e => {
-    const { target } = e;
-    const newVolume = +target.value;
-
-    if (newVolume) {
-      setVolume(newVolume);
-      wavesurfer.current.setVolume(newVolume || 1);
-    }
-  };
-
   return (
-    <div>
-      <div id="waveform" ref={waveformRef} />
-      <div className="controls">
-        <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
-        <input
-          type="range"
-          id="volume"
-          name="volume"
-          // waveSurfer recognize value of `0` same as `1`
-          //  so we need to set some zero-ish value for silence
-          min="0.01"
-          max="1"
-          step=".025"
-          onChange={onVolumeChange}
-          defaultValue={volume}
-        />
-        <label htmlFor="volume">Volume</label>
-      </div>
+    <>
+    <div className="waveform">
+      <div className="mic-loading-button play-pause" onClick={handlePlayPause}>{!playing ? 'Play' :'Pause' }</div>
+      <div className="wave" id="waveform" ref={waveformRef} />
     </div>
+    <div className="wave-container">
+      <div class="element">TimeStamp</div>
+      <div class="element">Correct Note</div>
+      <div class="element">Your Note</div>
+    </div>
+    </>
   );
 }
