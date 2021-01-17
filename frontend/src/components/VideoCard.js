@@ -1,9 +1,19 @@
 import React from 'react'
 
+const sendInfo = () => {
+
+    axios.post('/api/choosesong', {
+        url: props.value.id,
+        title: props.value.title
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+}
 
 const VideoCard = (props) => {
     return (
-        <div className='video-card'>
+        <div className='video-card' onClick={sendInfo}>
             <img className="videoImage" src={props.value.thumbnail}/>
             
             <div class="video-label">
