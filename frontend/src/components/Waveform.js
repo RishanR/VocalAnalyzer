@@ -89,12 +89,14 @@ export default function Waveform({ url }) {
       <div class="element">Correct Note</div>
       <div class="element">Your Note</div>
     </div>
+      <div className='wave-table-overflow'>
       { notes.map(row => {
-            return (<div className="wave-container"><div>{row['Time']}</div>
+            return (<div className="wave-container-inner"><div>{row['Time']}</div>
                    <div>{row['Artist Notes']}</div>
                   <div>{row['Singer Notes']}</div></div>)
           
       }) }
+      </div>
     
     </>
   );

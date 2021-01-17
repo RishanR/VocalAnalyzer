@@ -129,5 +129,7 @@ class VocalAnalysisView(APIView):
         df = pd.DataFrame(df)
 
         df.to_csv('frontend/static/frontend/src/spreadsheets/music_analysis.csv')
+
+        return HttpResponse('Works')
     
 

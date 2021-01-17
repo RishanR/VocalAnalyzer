@@ -297,7 +297,18 @@
   margin: 10px 10px;
   display: grid;
   grid-template-columns: 150px 150px 150px;
-  height:200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.wave-container-inner{
+  margin: 10px 10px;
+  display: grid;
+  grid-template-columns: 150px 150px 150px;
+}
+
+.wave-table-overflow {
+  height: 100px;
   overflow-y: auto;
   overflow-x: hidden;
 }
