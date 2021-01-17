@@ -1,23 +1,34 @@
 import crepe
+import crepe
 from scipy.io import wavfile
 
 
 def frequency_of_song_artist(file_name):
     sr, audio = wavfile.read(file_name)
     time, frequency, confidence, activation = crepe.predict(audio, sr,viterbi=True, step_size=50)
-    return frequency
+    return frequency, list(time)
 
 def frequency_of_singer(file_name):
     sr, audio = wavfile.read(file_name)
     time, frequency, confidence, activation = crepe.predict(audio, sr,viterbi=True, step_size=50)
-    return frequency
+    return frequency, list(time)
 
 
-artist_frequency = frequency_of_song_artist('Output/song/vocals.wav')
-singer_frequency = frequency_of_singer('test_audio.wav')
-
+artist_frequency, time_artist = frequency_of_song_artist('Output/song/vocals.wav')
+singer_frequency, time_singer = frequency_of_singer('test_audio.wav')
 artist_frequency = list(artist_frequency)
 singer_frequency = list(singer_frequency)
+
+if len(time_artist) >= len(time_singer):
+    time = time_singer
+    score = len(time_artist) - len(time_singer)
+    for i in range(score):
+        artist_frequency.pop()
+else:
+    time = time_artist
+    score = len(time_singer) - len(time_artist)
+    for i in range(score):
+        singer_frequency.pop()
 
 import pandas as pd
 from math import log2, pow
@@ -45,7 +56,7 @@ artist_label_frequencies = get_labels(artist_frequency)
 singer_label_frequencies = get_labels(singer_frequency)
 difference = []
 
-for i in range(min(len(artist_frequency), len(singer_frequency))):
+for i in range(len(time)):
     difference.append(artist_frequency[i]-singer_frequency[i])
 
 significant = []
@@ -55,9 +66,8 @@ for i in range(len(difference)):
     else:
         significant.append('No')
 
-df = {'Artist Notes': artist_label_frequencies, 'Singer Notes': singer_label_frequencies, 'Difference in frequency': difference, 'Significant Difference': significant}
+df = {'Time': time,'Artist Notes': artist_label_frequencies, 'Singer Notes': singer_label_frequencies, 'Difference in frequency': difference, 'Significant Difference': significant}
 
 df = pd.DataFrame(df)
-
 
 df.to_csv('music_analysis.csv')
