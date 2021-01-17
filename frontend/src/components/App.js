@@ -9,8 +9,8 @@ import "regenerator-runtime/runtime.js";
 const App = () => {
     return (
         <div className='main-container'>
-            {/* <RecordVocals /> */}
-            <ChooseSong />
+            <RecordVocals />
+            {/* <ChooseSong /> */}
         </div>
     )
 }
@@ -19,4 +19,3 @@ export default App;
 
 const appDiv = document.getElementById("app");
 render(<App />, appDiv);
-
