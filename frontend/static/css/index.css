@@ -257,3 +257,44 @@
   width: 700px;
   margin: 10px
 }
+
+.waveform{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width:100%;
+  height:200px;
+}
+
+.wave{
+  flex:4;
+}
+
+.play-pause{
+  font-weight:bold;
+  font-size: 18px;
+  color:white;
+  font-family: 'SourceSansPro','Oxygen', Arial, Helvetica, sans-serif;
+  margin-right: 10px;
+  justify-content: center;
+  align-items: center;  
+  display:flex;
+
+}
+
+.wave-container{
+  margin: 10px 10px;
+  display: grid;
+  grid-template-columns: 150px 150px 150px;
+  height:200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.element{
+  justify-self: center;
+  font-family: 'SourceSansPro','Oxygen', Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color:black;
+}
