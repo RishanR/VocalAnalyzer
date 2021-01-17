@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { ReactMic } from 'react-mic';
 import AudioAnalyser from './AudioAnalyser';
 import AudioNone from './AudioNone';
+import { useHistory } from 'react-router-dom';
 
 const RecordVocals = () => {
+    let history = useHistory();
+
     const [record, setRecord] = useState(false);
     const [iAudio, setIAudio] = useState(null);
     const [instAudio, setInstAudio] = useState(new Audio('/static/frontend/src/Output/mp3/accompaniment.wav'))
@@ -48,6 +51,7 @@ const RecordVocals = () => {
         toggleMicrophone();
         instAudio.pause();
         instAudio.currentTime = 0;
+        history.push('/analyze');
       }
      
     const onData = (recordedBlob) => {

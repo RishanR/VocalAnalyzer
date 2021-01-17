@@ -5,7 +5,7 @@ export default class Analyzer extends React.Component {
     render() {
       return (
          <div className='waveform-container'>
-           <Waveform url ={'./static/frontend/src/userVocals.wav'}/>
+           <Waveform url ={'./static/frontend/src/userVocalsNew.wav'}/>
         </div>
       )
     }

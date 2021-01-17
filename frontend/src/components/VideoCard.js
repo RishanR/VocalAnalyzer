@@ -1,7 +1,10 @@
 import React from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom';
 
 const VideoCard = (props) => {
+    let history = useHistory();
+
     const sendInfo = () => {
 
         axios.post('/api/choosesong', {
@@ -10,6 +13,7 @@ const VideoCard = (props) => {
           })
           .then(function (response) {
             console.log(response);
+            history.push('/record')
           })
     }
 

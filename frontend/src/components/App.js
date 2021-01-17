@@ -7,14 +7,20 @@ import RecordVocalsNew from './RecordVocalsNew'
 import Analyzer from './Analyzer'
 import regeneratorRuntime from "regenerator-runtime";
 import "regenerator-runtime/runtime.js";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const App = () => {
     return (
-        <div className='main-container'>
-            <Analyzer />
-            {/* <RecordVocals /> */}
-            {/* <ChooseSong /> */}
-        </div>
+        <Router>
+            <div className='main-container'>
+                <h1 className='heading-text'>Voice Analyzer</h1>
+                <Switch>
+                    <Route exact path='/analyze' component={Analyzer} />
+                    <Route exact path='/record' component={RecordVocals} />
+                    <Route exact path='/' component={ChooseSong}  />
+                </Switch>
+            </div>
+        </Router>
     )
 }
 
