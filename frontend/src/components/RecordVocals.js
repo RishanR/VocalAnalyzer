@@ -2,13 +2,19 @@ import React, { useState } from 'react'
 import { ReactMic } from 'react-mic';
 import AudioAnalyser from './AudioAnalyser';
 import AudioNone from './AudioNone';
-import Song from '../audio/song.mp3';
 
 const RecordVocals = () => {
     const [record, setRecord] = useState(false);
     const [iAudio, setIAudio] = useState(null);
-    const [instAudio, setInstAudio] = useState(new Audio(Song))
+    const [instAudio, setInstAudio] = useState(new Audio('/static/frontend/src/Output/mp3/accompaniment.wav'))
     console.log(instAudio);
+
+    const sendBlob = async (data) => {
+      let response = await fetch("/api/recordvocals", {
+        method: "post",
+        body: data
+      })
+    }
 
     const getMicrophone = async () => {
       const audio = await navigator.mediaDevices.getUserMedia({
@@ -50,6 +56,7 @@ const RecordVocals = () => {
      
     const onStop = (recordedBlob) => {
         console.log('recordedBlob is: ', recordedBlob);
+        sendBlob(recordedBlob.blob)
       }
 
     return (

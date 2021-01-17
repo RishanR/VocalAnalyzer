@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import main, ChosenSongView
+from .views import main, ChosenSongView, RecordVocalsView, VocalAnalysisView
 
 urlpatterns = [
     path('', main),
-    path('test', ChosenSongView.as_view())
+    path('choosesong', ChosenSongView.as_view()),
+    path('recordvocals', RecordVocalsView.as_view()),
+    path('vocalanalysis', VocalAnalysisView.as_view())
 ]

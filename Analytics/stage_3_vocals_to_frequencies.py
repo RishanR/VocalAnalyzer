@@ -2,7 +2,6 @@ import crepe
 import crepe
 from scipy.io import wavfile
 
-
 def frequency_of_song_artist(file_name):
     sr, audio = wavfile.read(file_name)
     time, frequency, confidence, activation = crepe.predict(audio, sr,viterbi=True, step_size=50)
@@ -14,8 +13,8 @@ def frequency_of_singer(file_name):
     return frequency, list(time)
 
 
-artist_frequency, time_artist = frequency_of_song_artist('Output/song/vocals.wav')
-singer_frequency, time_singer = frequency_of_singer('test_audio.wav')
+artist_frequency, time_artist = frequency_of_song_artist('frontend/static/frontend/src/Output/mp3/vocals.wav')
+singer_frequency, time_singer = frequency_of_singer('frontend/static/frontend/src/userVocals.wav')
 artist_frequency = list(artist_frequency)
 singer_frequency = list(singer_frequency)
 
@@ -70,4 +69,4 @@ df = {'Time': time,'Artist Notes': artist_label_frequencies, 'Singer Notes': sin
 
 df = pd.DataFrame(df)
 
-df.to_csv('music_analysis.csv')
+df.to_csv('/frontend/static/frontend/src/spreadsheets/music_analysis.csv')
