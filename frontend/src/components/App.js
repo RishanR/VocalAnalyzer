@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 import '../css/App.css'
 import ChooseSong from './ChooseSong'
 import RecordVocals from './RecordVocals'
+import regeneratorRuntime from "regenerator-runtime";
+import "regenerator-runtime/runtime.js";
 
 const App = () => {
     return (
