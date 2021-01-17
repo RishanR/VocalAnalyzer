@@ -31,6 +31,7 @@ export default function Waveform({ url }) {
   const wavesurfer = useRef(null);
   const [playing, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.5);
+  const [notes, setNotes] = useState({});
 
   // create new WaveSurfer instance
   // On component mount and when url changes
@@ -39,12 +40,20 @@ export default function Waveform({ url }) {
 
     var csv_file;
 
-    axios.get('/api/vocalanalysis')
-      .then(function (response) {
-        // handle success
-        csv_file = response;
-      console.log(response);
-    })
+    // axios.get('/api/vocalanalysis')
+    //   .then(function (response) {
+    //     // handle success
+        
+    //   console.log(response);
+    // })
+
+    d3.csv(data).then(function(data1){
+      setNotes(data1);
+      console.log(data1);
+  }).catch(function(err){
+    throw err
+  })
+
     const options = formWaveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
 
@@ -59,11 +68,7 @@ export default function Waveform({ url }) {
     });
 
     //replace data with csv
-    d3.csv(data).then(function(data){
-      console.log(data)
-    }).catch(function(err){
-      throw err
-    })
+    
 
     return () => wavesurfer.current.destroy();
   }, [url]);

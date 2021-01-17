@@ -308,3 +308,16 @@
   font-size: 18px;
   color:black;
 }
+
+.waveform-container{
+  width:600px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 1rem 0.5em;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
