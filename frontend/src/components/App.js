@@ -9,7 +9,8 @@ import "regenerator-runtime/runtime.js";
 const App = () => {
     return (
         <div className='main-container'>
-            <RecordVocals />
+            {/* <RecordVocals /> */}
+            <ChooseSong />
         </div>
     )
 }
