@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import * as d3 from 'd3';
+// import * as d3 from 'd3';
+import { csv } from 'd3';
 import axios from 'axios'
 import data from  '../../static/frontend/src/spreadsheets/music_analysis.csv';
 import WaveSurfer from "wavesurfer.js";
+
 
 var linGrad = document.createElement('canvas').getContext('2d').createLinearGradient(0, 0, 1000, 128);
 linGrad.addColorStop(0, '#ff8934');
@@ -31,7 +33,7 @@ export default function Waveform({ url }) {
   const wavesurfer = useRef(null);
   const [playing, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.5);
-  const [notes, setNotes] = useState({});
+  const [notes, setNotes] = useState([]);
 
   // create new WaveSurfer instance
   // On component mount and when url changes
@@ -40,19 +42,18 @@ export default function Waveform({ url }) {
 
     var csv_file;
 
-    // axios.get('/api/vocalanalysis')
-    //   .then(function (response) {
-    //     // handle success
-        
-    //   console.log(response);
-    // })
-
-    d3.csv(data).then(function(data1){
-      setNotes(data1);
-      console.log(data1);
-  }).catch(function(err){
-    throw err
-  })
+    axios.get('/api/vocalanalysis')
+      .then(function (response) {
+        // handle success
+        csv('../static/frontend/src/spreadsheets/music_analysis.csv').then(data => {
+          setNotes(data);
+          console.log(data);
+        }).catch(function(err){
+          throw err
+        })
+      console.log(response);
+    })
+    
 
     const options = formWaveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
@@ -89,6 +90,13 @@ export default function Waveform({ url }) {
       <div class="element">Correct Note</div>
       <div class="element">Your Note</div>
     </div>
+      { notes.map(row => {
+            return (<div className="wave-container"><div>{row['Time']}</div>
+                   <div>{row['Artist Notes']}</div>
+                  <div>{row['Singer Notes']}</div></div>)
+          
+      }) }
+    
     </>
   );
 }
