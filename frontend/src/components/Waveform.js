@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 // import * as d3 from 'd3';
 import { csv } from 'd3';
-import axios from 'axios'
-import data from  '../../static/frontend/src/spreadsheets/music_analysis.csv';
+import axios from 'axios';
 import WaveSurfer from "wavesurfer.js";
 
 
